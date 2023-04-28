@@ -1,23 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SupermarketPOO
+﻿namespace SupermarketPOO
 {
     public class ComposedProduct : Product
     {
         public float Discount { get; set; }
-        public List Products { get; set; }
+        public List<Product>? Products { get; set; }
 
         public override decimal ValueToPay()
         {
-            return ValueToPay();
+            decimal totalValues = 0;
+            
+            foreach (Product product in Products)
+            {
+                Console.WriteLine(product.Description);
+                totalValues += product.ValueToPay();
+            }
+            decimal discountPer = (totalValues * 12) / 100;
+            totalValues -= discountPer;
+            return totalValues;
         }
 
         public override string ToString()
         {
-            return $"{ValueToPay()}";
+            return $"  {Id}  {Description}" +
+                $"\n\tProducts...: {Products}" +
+                $"\n\tDiscount...: {$"{Discount:P2}", 14}" +
+                $"\n\tValue......: {$"{ValueToPay():C2}", 14}";
         }
     }
 }
