@@ -8,29 +8,38 @@ namespace SupermarketPOO
 {
     public class Invoice : IPay
     {
-       
-        private string _products;
+        private List<Product> _products= null!;
 
-        public Invoice(string products)
+        public Invoice()
         {
             Console.WriteLine("RECEIPT");
-            Console.WriteLine("-------------------------------------");
-            _products = products;
+            Console.WriteLine("------------------------------------------------------");
+        
         }
 
-        //public string AddProduct()
-        //{
+        public static void AddProduct(Product products)
+        {
+            Console.WriteLine(products);
+        }
 
-        //}
-        
         public decimal ValueToPay()
         {
-            throw new NotImplementedException();
+            decimal totalValues = 0;
+            foreach (Product product in _products)
+            {
+                Console.WriteLine(product);
+                //totalValues += product.ValueToPay();
+            }
+            return totalValues;
         }
 
         public override string ToString()
         {
-            return base.ToString();
+            return $"{AddProduct}" +
+                $"\n\t===========================" +
+                $"\n\t{ValueToPay()}";
         }
+
+       
     }
 }
